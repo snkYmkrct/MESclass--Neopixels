@@ -219,6 +219,14 @@ int main(void)
   Set_LED(21, 102, 0, 235);
   Set_LED(22, 47, 38, 77);
 
+  uint8_t i;
+  for (i=0; i<23; i++){
+	  //Set_LED(i, 125, 125, 0); // yellow
+	  //Set_LED(i, 255, 0, 0);  //red
+	  //Set_LED(i, 0, 255, 0);  // green
+	  Set_LED(i, 0, 0, 255);  //blue
+  }
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
