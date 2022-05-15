@@ -225,7 +225,9 @@ int main(void)
 	  //Set_LED(i, 255, 0, 0);  //red
 	  //Set_LED(i, 0, 255, 0);  // green
 	  Set_LED(i, 0, 0, 255);  //blue
+	  //Set_LED(i, 255, 255, 255);  //
   }
+  i = 100;
 
   /* USER CODE END 2 */
 
@@ -233,6 +235,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
 
 	  HAL_ADC_Start(&hadc3); // start the adc
 	  HAL_ADC_PollForConversion(&hadc3, 0); // poll for conversion timeout value
@@ -247,7 +250,9 @@ int main(void)
 
 	  HAL_ADC_Stop(&hadc3); // stop adc
 
-/*	  for (int i=0; i<46; i++)
+
+/*
+	  for (int i=0; i<46; i++)
 	  {
 		  Set_Brightness(i);
 		  WS2812_Send();
@@ -259,7 +264,8 @@ int main(void)
 		  Set_Brightness(i);
 		  WS2812_Send();
 		  HAL_Delay (100);
-	  }*/
+	  }
+*/
 
     /* USER CODE END WHILE */
 
