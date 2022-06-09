@@ -32,7 +32,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define MAX_LED 23
-#define USE_BRIGHTNESS 1
+#define USE_BRIGHTNESS 0
 
 /* USER CODE END PD */
 
@@ -57,7 +57,7 @@ UART_HandleTypeDef huart1;
 
 uint8_t LED_Data[MAX_LED][4];
 uint8_t LED_Mod[MAX_LED][4];  // for brightness
-volatile int datasentflag = 0;
+//volatile int datasentflag = 0;
 
 /* USER CODE END PV */
 
@@ -145,14 +145,14 @@ void WS2812_Send (void)
 	}
 
 	HAL_TIM_PWM_Start_DMA(&htim1, TIM_CHANNEL_1, (uint32_t *)pwmData, indx);
-	while (!datasentflag){};
-	datasentflag = 0;
+//	while (!datasentflag){};
+//	datasentflag = 0;
 }
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
 	HAL_TIM_PWM_Stop_DMA(&htim1, TIM_CHANNEL_1);
-	datasentflag=1;
+//	datasentflag=1;
 }
 
 /* USER CODE END 0 */
@@ -219,15 +219,16 @@ int main(void)
   Set_LED(21, 102, 0, 235);
   Set_LED(22, 47, 38, 77);
 
-  uint8_t i;
-  for (i=0; i<23; i++){
+
+  for (uint8_t i=0; i<23; i++){
 	  //Set_LED(i, 125, 125, 0); // yellow
 	  //Set_LED(i, 255, 0, 0);  //red
 	  //Set_LED(i, 0, 255, 0);  // green
-	  Set_LED(i, 0, 0, 255);  //blue
+	  //Set_LED(i, 0, 0, 255);  //blue
 	  //Set_LED(i, 255, 255, 255);  //
   }
-  i = 100;
+  WS2812_Send();
+  //i = 100;
 
   /* USER CODE END 2 */
 
@@ -236,6 +237,7 @@ int main(void)
   while (1)
   {
 
+/*
 
 	  HAL_ADC_Start(&hadc3); // start the adc
 	  HAL_ADC_PollForConversion(&hadc3, 0); // poll for conversion timeout value
@@ -246,12 +248,29 @@ int main(void)
 		  adc_val = 0;
 	  }
 	  Set_Brightness( (adc_val * 45) / 4096 );  // 45 value for max brightness in this implementation
+*/
+	  //WS2812_Send();
+
+	 // HAL_ADC_Stop(&hadc3); // stop adc
+
+	  for (uint8_t i=0; i<23; i++){
+		  Set_LED(i, 125, 125, 0); // yellow
+	  }
 	  WS2812_Send();
-
-	  HAL_ADC_Stop(&hadc3); // stop adc
-
+	  HAL_Delay (3000);
+	  for (uint8_t i=0; i<23; i++){
+		  Set_LED(i, 255, 0, 0);  //red
+	  }
+	  WS2812_Send();
+	  HAL_Delay (3000);
+	  for (uint8_t i=0; i<23; i++){
+		  Set_LED(i, 0, 255, 0);  // green
+	  }
+	  WS2812_Send();
+	  HAL_Delay (3000);
 
 /*
+
 	  for (int i=0; i<46; i++)
 	  {
 		  Set_Brightness(i);
@@ -265,7 +284,9 @@ int main(void)
 		  WS2812_Send();
 		  HAL_Delay (100);
 	  }
+
 */
+
 
     /* USER CODE END WHILE */
 
