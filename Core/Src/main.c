@@ -148,12 +148,14 @@ void WS2812_Send (void)
 //	while (!datasentflag){};
 //	datasentflag = 0;
 }
+/*
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
 	HAL_TIM_PWM_Stop_DMA(&htim1, TIM_CHANNEL_1);
 //	datasentflag=1;
 }
+*/
 
 /* USER CODE END 0 */
 
@@ -253,21 +255,21 @@ int main(void)
 
 	 // HAL_ADC_Stop(&hadc3); // stop adc
 
-	  for (uint8_t i=0; i<23; i++){
-		  Set_LED(i, 125, 125, 0); // yellow
-	  }
-	  WS2812_Send();
-	  HAL_Delay (3000);
+	  //for (uint8_t i=0; i<23; i++){
+	//	  Set_LED(i, 125, 125, 0); // yellow
+	 // }
+	  //WS2812_Send();
+	  //HAL_Delay (3000);
 	  for (uint8_t i=0; i<23; i++){
 		  Set_LED(i, 255, 0, 0);  //red
 	  }
 	  WS2812_Send();
-	  HAL_Delay (3000);
+	  //HAL_Delay (3000);
 	  for (uint8_t i=0; i<23; i++){
 		  Set_LED(i, 0, 255, 0);  // green
 	  }
 	  WS2812_Send();
-	  HAL_Delay (3000);
+	  //HAL_Delay (3000);
 
 /*
 
